@@ -1,0 +1,23 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { ColorTokens } from "./blocks/TokenBlocks";
+
+<Meta title="Design tokens/Colors" />
+
+# Colors
+
+Components use **semantic** color tokens such as `--nl-color-text` and `--nl-color-action`,
+never raw palette values. Each style defines every semantic token for light and dark, so
+switching style or scheme changes the whole UI with no component changes.
+
+Everything below is rendered from the real `tokens.json`, and the ratios are computed from it.
+Translucent colors (the glass surfaces) are judged as they appear, laid over the page's base color.
+
+<ColorTokens />
+
+## Reading the contrast table
+
+- Text needs **4.5:1** (3:1 for large text); borders that identify a form control need **3:1**.
+- Glass surfaces sit on a gradient. The browser audit (`pnpm a11y`) checks them against the _worst-case_
+  spot of that gradient, which is stricter than the base-color numbers shown here.
+- Filled controls use a gradient in the glass style. Their label contrast is checked at every gradient stop
+  by the token tests (`pnpm --filter northlight-ui-tokens test`), not in this table.

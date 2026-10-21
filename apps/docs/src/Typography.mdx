@@ -1,0 +1,24 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { TypeScale } from "./blocks/TokenBlocks";
+
+<Meta title="Design tokens/Typography" />
+
+# Typography
+
+One size scale shared by every style, with a different typeface and weight mapping per style.
+The library falls back to system fonts, so it never blocks rendering. Load the typeface you want in your app
+(Storybook loads _Manrope_ for glass and _Space Grotesk_ for brutal).
+
+<TypeScale />
+
+## Using it
+
+Use the [`Text`](?path=/docs/foundations-text--docs) component, which applies these tokens and separates meaning from looks:
+
+```tsx
+<Text as="h2" size="xl" weight="semibold">Section title</Text>
+<Text as="p" tone="muted">Supporting copy.</Text>
+```
+
+Pick the element for the structure of the page (`h2`, `p`) and the `size` for how it should look.
+Never choose a heading level because of how large it renders.

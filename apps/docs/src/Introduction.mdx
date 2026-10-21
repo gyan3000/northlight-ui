@@ -1,0 +1,86 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Introduction" />
+
+# Northlight UI
+
+An accessible, themeable React component library built on a CSS-variable design-token system.
+Every component is typed, keyboard-operable, tested with axe in jsdom **and** in a real browser,
+and re-themeable without rebuilding the package.
+
+- **34 components** plus a `ThemeProvider`, from `Button` and `Input` to `Dialog`, `Combobox` and `Table`.
+- **Two visual styles** in the box: _Glass and aurora_ (the default) and _Soft neo-brutalist_, each with light and dark.
+- **Small:** every component entry is under 5 KB gzipped (React and the Radix primitives excluded), enforced by `pnpm size`.
+- **WCAG 2.2 AA** as the target, checked on every story in every style and theme. See [Accessibility](?path=/docs/guides-accessibility--docs).
+
+## Install
+
+The package is not published to npm yet; the repository is local. From the repo root:
+
+```bash
+pnpm install
+pnpm build          # tokens first, then the React package
+pnpm --filter northlight-ui pack   # makes a tarball you can install in another app
+```
+
+React 18 or 19 is a peer dependency.
+
+## Quick start
+
+```tsx
+import "northlight-ui/tokens.css";   // design tokens (CSS variables)
+import "northlight-ui/styles.css";   // component styles
+import { Button, FormField, Input, ThemeProvider } from "northlight-ui";
+
+export function App() {
+  return (
+    <ThemeProvider>
+      <FormField label="Email" hint="We never share it.">
+        <Input type="email" />
+      </FormField>
+      <Button>Save</Button>
+    </ThemeProvider>
+  );
+}
+```
+
+Import one component only, to keep bundles small:
+
+```tsx
+import { Button } from "northlight-ui/button";
+```
+
+## Choosing a style
+
+Set two attributes on `<html>`:
+
+```html
+<html data-style="brutal" data-theme="dark">
+```
+
+Leave `data-style` off for Glass and aurora; leave `data-theme` off to follow the operating system.
+Details and how to make your own style are in the [Theming guide](?path=/docs/guides-theming--docs).
+
+## What is in here
+
+| Group | Components |
+| --- | --- |
+| Foundations | Box, Stack, Text, Icon |
+| Actions | Button, IconButton |
+| Forms | Input, Textarea, Label, FormField, Checkbox, Radio, Switch, Select, Combobox, Slider |
+| Feedback | Alert, Toast, Spinner, Progress, Skeleton, Badge |
+| Overlays | Dialog, Drawer, Popover, Tooltip, DropdownMenu |
+| Navigation | Tabs, Accordion, Breadcrumb, Pagination |
+| Data display | Table, Avatar |
+| Layout | Card |
+
+Each component page has live examples with controls, a props table generated from the TypeScript,
+usage do and don't, and a keyboard and ARIA reference. The **Recipes** section shows them working together.
+
+## Principles
+
+1. **Accessibility is a guarantee, not a feature.** Keyboard behavior and ARIA are tested per component.
+2. **Tokens, not hardcoded values.** Components read semantic tokens only, so a style is a set of values.
+3. **Wrap, don't rebuild, the hard parts.** Focus trapping and listbox logic come from Radix; simple components are written by hand.
+4. **No hidden strings.** Anything a screen reader says comes from a prop, so it can be translated.
+5. **Logical CSS everywhere.** Layouts are right-to-left safe; every component has an RTL story.

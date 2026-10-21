@@ -1,0 +1,29 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { SpacingScale } from "./blocks/TokenBlocks";
+
+<Meta title="Design tokens/Spacing" />
+
+# Spacing
+
+A single spacing scale, identical in every style. Components and layouts use these steps instead of
+arbitrary pixel values, which keeps rhythm consistent and lets a theme scale density in one place.
+
+<SpacingScale />
+
+## Using it
+
+In CSS, reference the token:
+
+```css
+.card { padding: var(--nl-space-4); gap: var(--nl-space-2); }
+```
+
+In React, prefer the layout components, which take the scale's keys:
+
+```tsx
+<Stack gap="4">
+  <Box padding="5" radius="lg" surface="subtle" bordered>…</Box>
+</Stack>
+```
+
+Use logical properties (`padding-inline`, `margin-block`) so layouts flip correctly in right-to-left languages.

@@ -1,0 +1,50 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Guides/Accessibility" />
+
+# Accessibility
+
+The target is **WCAG 2.2 AA**. This page says what the library does about it, how that is checked, and, just as
+important, what has **not** been checked yet.
+
+## What every component does
+
+- Fully keyboard operable, with a visible focus ring that meets 3:1 against its surroundings.
+- Correct roles, names and states. Form controls link their label, hint and error through `aria-describedby`.
+- Overlays (`Dialog`, `Drawer`) trap and restore focus, close on Escape and lock background scroll.
+- `prefers-reduced-motion` is respected: movement stops, spinners and shimmers slow or stop.
+- Anything a screen reader announces comes from a prop (`label`, `closeLabel`, `emptyLabel`…), so it can be translated.
+- Layouts use logical properties and every component has a right-to-left story.
+
+Each component's page lists its keyboard shortcuts and ARIA roles under **Accessibility**.
+
+## How it is checked
+
+| Layer | Tool | What it covers |
+| --- | --- | --- |
+| Per component | `jest-axe` in jsdom | Roles, names, ARIA validity, labels, in every state |
+| Behavior | Testing Library + user-event | Real keyboard flows: Tab order, arrows, Escape, focus return |
+| Real browser | `pnpm a11y` (axe + Chromium) | Color contrast and focus on **every story**, in both styles and both color schemes |
+| Tokens | `pnpm --filter northlight-ui-tokens test` | Contrast of button labels at every stop of a gradient fill |
+
+jsdom cannot evaluate color contrast, which is why the browser run exists.
+
+### Honest limits
+
+- **Glass surfaces** sit on a gradient, which axe cannot sample. The audit checks them against the worst-case spot
+  of that gradient, so it is stricter than real use, not looser.
+- **Disabled controls** are exempt from the contrast minimum under WCAG 1.4.3. The audit skips the label text of
+  our own disabled labels only, and reports how many it skipped.
+- While a Radix **modal** is open it marks the page behind it `aria-hidden`; axe flags the trigger inside. Focus is
+  trapped in the modal at that point, so the audit ignores that one result, and only for Storybook's own root.
+
+## Not done yet
+
+These are on the list before a 1.0 and have **not** been checked:
+
+- A screen-reader pass (NVDA or VoiceOver) of Dialog, Select, Tabs and Toast.
+- Windows high-contrast / forced-colors mode. Translucent glass surfaces and hard shadows can disappear there.
+- 200% zoom and text-only zoom.
+- A real iOS Safari device.
+
+Automated checks only catch part of the problems that real users hit. Treat them as a floor, not a finish line.

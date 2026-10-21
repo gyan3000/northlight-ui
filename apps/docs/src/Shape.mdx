@@ -1,0 +1,23 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { ShapeTokens } from "./blocks/TokenBlocks";
+
+<Meta title="Design tokens/Radius and elevation" />
+
+# Radius and elevation
+
+These tokens are what makes the two styles feel different besides color. _Glass and aurora_ uses large radii,
+hairline borders and soft, glowing shadows over a blurred surface. _Soft neo-brutalist_ uses chunky radii,
+thick borders and hard offset shadows with no blur.
+
+<ShapeTokens />
+
+## Related tokens
+
+| Token | What it controls |
+| --- | --- |
+| `--nl-radius-*` | Corner radius scale (`sm` to `full`) |
+| `--nl-shadow-*` | Elevation, plus `pressed` and `invalid` states |
+| `--nl-border-width-control` | Border on inputs and buttons |
+| `--nl-border-width-container` | Border on cards, alerts and panels |
+| `--nl-blur-surface` | Background blur behind translucent surfaces |
+| `--nl-transform-hover`, `--nl-transform-press` | How controls move on hover and press |

@@ -1,0 +1,6 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "noEmit": true },
+  "include": [".storybook", "src", "../../packages/react/src/**/*.stories.tsx", "../../packages/react/src/css-modules.d.ts"],
+  "exclude": ["../../packages/react/src/**/*.test.tsx"]
+}
