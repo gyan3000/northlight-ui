@@ -1,0 +1,154 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--nl-space-2);
+  border: var(--nl-border-width-control) solid var(--nl-color-edge);
+  border-radius: var(--nl-radius-md);
+  box-shadow: var(--nl-shadow-md);
+  font-family: var(--nl-font-family-sans);
+  font-weight: var(--nl-font-weight-semibold);
+  line-height: var(--nl-font-leading-tight);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  transition:
+    transform var(--nl-motion-duration-fast) var(--nl-motion-easing-standard),
+    box-shadow var(--nl-motion-duration-fast) var(--nl-motion-easing-standard),
+    background-color var(--nl-motion-duration-fast) var(--nl-motion-easing-standard);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--nl-color-focus-ring);
+  outline-offset: 3px;
+}
+
+/* Lifts toward the cursor on hover, then physically presses into its shadow. */
+.button:hover:not(:disabled, [aria-disabled="true"]) {
+  transform: var(--nl-transform-hover);
+  box-shadow: var(--nl-shadow-lg);
+}
+
+.button:active:not(:disabled, [aria-disabled="true"]) {
+  transform: var(--nl-transform-press);
+  box-shadow: var(--nl-shadow-pressed);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.button[aria-disabled="true"] {
+  cursor: progress;
+}
+
+/* Sizes (logical properties keep the layout RTL-safe) */
+.sm {
+  padding-block: var(--nl-space-1);
+  padding-inline: var(--nl-space-3);
+  font-size: var(--nl-font-size-sm);
+}
+.md {
+  padding-block: var(--nl-space-2);
+  padding-inline: var(--nl-space-5);
+  font-size: var(--nl-font-size-sm);
+}
+.lg {
+  padding-block: var(--nl-space-3);
+  padding-inline: var(--nl-space-6);
+  font-size: var(--nl-font-size-md);
+}
+
+/* Tones set the fill (--_c) and the text color used on plain backgrounds (--_fg). */
+.accent {
+  --_c: var(--nl-fill-action);
+  --_c-hover: var(--nl-fill-action-hover);
+  --_c-text: var(--nl-color-action-text);
+  --_fg: var(--nl-color-text);
+}
+.danger {
+  --_c: var(--nl-fill-danger);
+  --_c-hover: var(--nl-fill-danger-hover);
+  --_c-text: var(--nl-color-danger-text);
+  --_fg: var(--nl-color-danger);
+}
+
+.solid {
+  background: var(--_c);
+  color: var(--_c-text);
+}
+.solid:hover:not(:disabled, [aria-disabled="true"]) {
+  background: var(--_c-hover);
+}
+
+.outline {
+  background: var(--nl-color-surface);
+  color: var(--_fg);
+  border-color: var(--nl-color-border-strong);
+  backdrop-filter: var(--nl-blur-surface);
+  -webkit-backdrop-filter: var(--nl-blur-surface);
+}
+.outline:hover:not(:disabled, [aria-disabled="true"]) {
+  background: var(--nl-color-subtle);
+}
+
+/* Ghost drops the border and shadow so it reads as quiet text until hovered. */
+.ghost {
+  background: transparent;
+  color: var(--_fg);
+  border-color: transparent;
+  box-shadow: none;
+}
+.ghost:hover:not(:disabled, [aria-disabled="true"]) {
+  background: var(--nl-color-subtle);
+  border-color: var(--nl-color-outline);
+  box-shadow: var(--nl-shadow-sm);
+  transform: none;
+}
+.ghost:active:not(:disabled, [aria-disabled="true"]) {
+  transform: var(--nl-transform-press);
+  box-shadow: none;
+}
+
+/* Icons scale with the button's font size and follow the text color. */
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  inline-size: 1.25em;
+  block-size: 1.25em;
+}
+.icon > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.spinner {
+  inline-size: 1em;
+  block-size: 1em;
+  border: 2px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: var(--nl-radius-full);
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+  .button:hover:not(:disabled, [aria-disabled="true"]),
+  .button:active:not(:disabled, [aria-disabled="true"]) {
+    transform: none;
+  }
+  .spinner {
+    animation-duration: 2s;
+  }
+}

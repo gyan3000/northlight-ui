@@ -1,0 +1,107 @@
+.root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nl-space-3);
+  font-family: var(--nl-font-family-sans);
+  font-size: var(--nl-font-size-sm);
+  font-weight: var(--nl-font-weight-medium);
+  line-height: var(--nl-font-leading-normal);
+  color: var(--nl-color-text);
+  cursor: pointer;
+}
+
+.root[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* The real input stays in the layout (so it is focusable and clickable)
+   but is invisible; .box draws the control. */
+.input {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 1.375rem;
+  block-size: 1.375rem;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.box {
+  box-sizing: border-box;
+  /* Grid, not flex: the check and the dash share one cell, so each is centered. */
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  inline-size: 1.375rem;
+  block-size: 1.375rem;
+  border: var(--nl-border-width-control) solid var(--nl-color-border-strong);
+  border-radius: var(--nl-radius-sm);
+  background: var(--nl-color-surface);
+  color: var(--nl-color-action-text);
+  box-shadow: var(--nl-shadow-sm);
+  transition:
+    transform var(--nl-motion-duration-fast) var(--nl-motion-easing-standard),
+    box-shadow var(--nl-motion-duration-fast) var(--nl-motion-easing-standard),
+    background-color var(--nl-motion-duration-fast) var(--nl-motion-easing-standard);
+}
+
+/* Smaller than the box so the mark has even padding on every side. */
+.check,
+.dash {
+  display: block;
+  grid-area: 1 / 1;
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+  opacity: 0;
+}
+
+.input:hover:not(:disabled) + .box {
+  transform: var(--nl-transform-hover);
+  box-shadow: var(--nl-shadow-md);
+}
+
+.input:checked + .box,
+.input:indeterminate + .box {
+  background: var(--nl-fill-action);
+  border-color: var(--nl-color-edge);
+  /* In the brutal style this sits pressed in, like a button that stays down. */
+  transform: var(--nl-transform-checked);
+  box-shadow: var(--nl-shadow-pressed);
+}
+
+.input:checked + .box .check {
+  opacity: 1;
+}
+
+.input:indeterminate + .box .dash {
+  opacity: 1;
+}
+.input:indeterminate + .box .check {
+  opacity: 0;
+}
+
+.input:focus-visible + .box {
+  outline: 3px solid var(--nl-color-focus-ring);
+  outline-offset: 3px;
+}
+
+.input[data-invalid] + .box {
+  border-color: var(--nl-color-danger);
+  box-shadow: var(--nl-shadow-invalid);
+}
+.input[data-invalid]:checked + .box {
+  background: var(--nl-fill-danger);
+  color: var(--nl-color-danger-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .box {
+    transition: none;
+  }
+  .input:hover:not(:disabled) + .box {
+    transform: none;
+  }
+}

@@ -1,0 +1,38 @@
+.nav {
+  font-family: var(--nl-font-family-sans);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--nl-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Square-ish page buttons with a stable width for 1 to 3 digits. */
+.page.page {
+  min-inline-size: 2rem;
+  padding-inline: var(--nl-space-2);
+}
+
+.ellipsis {
+  display: inline-flex;
+  inline-size: 2rem;
+  justify-content: center;
+  color: var(--nl-color-text-muted);
+  user-select: none;
+}
+
+/* Previous/next arrows mirror in right-to-left layouts. */
+.flip {
+  transform: scaleX(-1);
+}
+[dir="rtl"] .rtlFlip svg {
+  transform: scaleX(-1);
+}
+[dir="rtl"] .rtlFlip .flip {
+  transform: none;
+}

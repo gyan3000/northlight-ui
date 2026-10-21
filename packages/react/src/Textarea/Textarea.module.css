@@ -1,0 +1,7 @@
+/* Doubled class so these win over the shared Input rules regardless of CSS order. */
+.textarea.textarea {
+  display: block;
+  min-block-size: 5rem;
+  resize: vertical;
+  line-height: var(--nl-font-leading-normal);
+}

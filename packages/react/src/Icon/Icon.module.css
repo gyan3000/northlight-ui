@@ -1,0 +1,34 @@
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.icon > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.sm {
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+.md {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+.lg {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+}
+.xl {
+  inline-size: 2rem;
+  block-size: 2rem;
+}
+/* Scales with the surrounding font size. */
+.inherit {
+  inline-size: 1.25em;
+  block-size: 1.25em;
+}

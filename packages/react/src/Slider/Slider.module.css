@@ -1,0 +1,79 @@
+.root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  block-size: 1.5rem;
+  touch-action: none;
+  user-select: none;
+}
+.root[data-orientation="vertical"] {
+  flex-direction: column;
+  inline-size: 1.5rem;
+  block-size: 12rem;
+}
+
+.track {
+  position: relative;
+  flex-grow: 1;
+  box-sizing: border-box;
+  border: var(--nl-border-width-control) solid var(--nl-color-border-strong);
+  border-radius: var(--nl-radius-full);
+  background: var(--nl-color-surface);
+  backdrop-filter: var(--nl-blur-surface);
+  -webkit-backdrop-filter: var(--nl-blur-surface);
+}
+.root[data-orientation="horizontal"] .track {
+  block-size: 0.625rem;
+}
+.root[data-orientation="vertical"] .track {
+  inline-size: 0.625rem;
+}
+
+.range {
+  position: absolute;
+  background: var(--nl-fill-action);
+  border-radius: var(--nl-radius-full);
+}
+.root[data-orientation="horizontal"] .range {
+  block-size: 100%;
+}
+.root[data-orientation="vertical"] .range {
+  inline-size: 100%;
+}
+
+.thumb {
+  display: block;
+  box-sizing: border-box;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border: var(--nl-border-width-control) solid var(--nl-color-edge);
+  border-radius: var(--nl-radius-full);
+  background: var(--nl-fill-action);
+  box-shadow: var(--nl-shadow-sm);
+  cursor: grab;
+  transition: box-shadow var(--nl-motion-duration-fast) var(--nl-motion-easing-standard);
+}
+.thumb:hover {
+  box-shadow: var(--nl-shadow-md);
+}
+.thumb:active {
+  cursor: grabbing;
+}
+.thumb:focus-visible {
+  outline: 3px solid var(--nl-color-focus-ring);
+  outline-offset: 3px;
+}
+
+.root[data-disabled] {
+  opacity: 0.5;
+}
+.root[data-disabled] .thumb {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thumb {
+    transition: none;
+  }
+}

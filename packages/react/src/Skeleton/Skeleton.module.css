@@ -1,0 +1,42 @@
+.skeleton {
+  display: block;
+  background-color: var(--nl-color-subtle);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--nl-color-surface) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 1.4s var(--nl-motion-easing-standard) infinite;
+}
+
+.text {
+  inline-size: 100%;
+  block-size: 1em;
+  border-radius: var(--nl-radius-sm);
+}
+.rect {
+  border-radius: var(--nl-radius-md);
+}
+.circle {
+  border-radius: var(--nl-radius-full);
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Reduced motion: a still placeholder is enough. */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background-image: none;
+  }
+}

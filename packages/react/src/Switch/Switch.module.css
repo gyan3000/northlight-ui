@@ -1,0 +1,91 @@
+.root {
+  --_bw: var(--nl-border-width-control);
+  --_track-w: 3rem;
+  --_track-h: 1.75rem;
+  --_gap: 0.1875rem;
+  /* Absolute children sit inside the border, so subtract it from the track. */
+  --_thumb: calc(var(--_track-h) - 2 * var(--_bw) - 2 * var(--_gap));
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nl-space-3);
+  font-family: var(--nl-font-family-sans);
+  font-size: var(--nl-font-size-sm);
+  font-weight: var(--nl-font-weight-medium);
+  line-height: var(--nl-font-leading-normal);
+  color: var(--nl-color-text);
+  cursor: pointer;
+}
+
+.root[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: var(--_track-w);
+  block-size: var(--_track-h);
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.track {
+  position: relative;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  inline-size: var(--_track-w);
+  block-size: var(--_track-h);
+  border: var(--_bw) solid var(--nl-color-border-strong);
+  border-radius: var(--nl-radius-full);
+  background: var(--nl-color-subtle);
+  box-shadow: var(--nl-shadow-sm);
+  backdrop-filter: var(--nl-blur-surface);
+  -webkit-backdrop-filter: var(--nl-blur-surface);
+  transition: background-color var(--nl-motion-duration-base) var(--nl-motion-easing-standard);
+}
+
+/* A solid ink thumb. inset-inline-start makes it travel the right way in RTL too. */
+.thumb {
+  position: absolute;
+  inset-block-start: var(--_gap);
+  inset-inline-start: var(--_gap);
+  inline-size: var(--_thumb);
+  block-size: var(--_thumb);
+  border-radius: var(--nl-radius-full);
+  background: var(--nl-color-ink);
+  transition: inset-inline-start var(--nl-motion-duration-base) var(--nl-motion-easing-standard);
+}
+
+.input:checked + .track {
+  background: var(--nl-fill-action);
+  border-color: var(--nl-color-edge);
+}
+
+.input:checked + .track .thumb {
+  inset-inline-start: calc(var(--_track-w) - 2 * var(--_bw) - var(--_thumb) - var(--_gap));
+}
+
+.input:focus-visible + .track {
+  outline: 3px solid var(--nl-color-focus-ring);
+  outline-offset: 3px;
+}
+
+.input[aria-invalid="true"] + .track {
+  border-color: var(--nl-color-danger);
+  box-shadow: var(--nl-shadow-invalid);
+}
+.input[aria-invalid="true"] + .track .thumb {
+  background: var(--nl-color-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track,
+  .thumb {
+    transition: none;
+  }
+}

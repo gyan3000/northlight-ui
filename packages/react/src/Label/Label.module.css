@@ -1,0 +1,13 @@
+.label {
+  display: inline-flex;
+  gap: var(--nl-space-1);
+  font-family: var(--nl-font-family-sans);
+  font-size: var(--nl-font-size-sm);
+  font-weight: var(--nl-font-weight-medium);
+  line-height: var(--nl-font-leading-tight);
+  color: var(--nl-color-text);
+}
+
+.required {
+  color: var(--nl-color-danger);
+}

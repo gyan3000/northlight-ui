@@ -1,0 +1,90 @@
+.content {
+  z-index: var(--nl-z-popover);
+  box-sizing: border-box;
+  min-inline-size: 12rem;
+  max-block-size: var(--radix-dropdown-menu-content-available-height);
+  overflow-y: auto;
+  padding: var(--nl-space-1);
+  border: var(--nl-border-width-container) solid var(--nl-color-outline);
+  border-radius: var(--nl-radius-md);
+  background: var(--nl-color-surface-raised);
+  color: var(--nl-color-text);
+  box-shadow: var(--nl-shadow-lg);
+  backdrop-filter: var(--nl-blur-surface);
+  -webkit-backdrop-filter: var(--nl-blur-surface);
+  font-family: var(--nl-font-family-sans);
+  animation: fade-in var(--nl-motion-duration-fast) var(--nl-motion-easing-standard);
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nl-space-3);
+  padding-block: var(--nl-space-2);
+  padding-inline: var(--nl-space-3);
+  border-radius: var(--nl-radius-sm);
+  font-size: var(--nl-font-size-sm);
+  line-height: var(--nl-font-leading-tight);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+.item[data-highlighted] {
+  background: var(--nl-fill-action);
+  color: var(--nl-color-action-text);
+}
+
+.danger {
+  color: var(--nl-color-danger);
+}
+.danger[data-highlighted] {
+  background: var(--nl-fill-danger);
+  color: var(--nl-color-danger-text);
+}
+
+.item[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.indicator {
+  display: inline-flex;
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+.indicator > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.separator {
+  block-size: var(--nl-border-width-container);
+  margin-block: var(--nl-space-1);
+  margin-inline: calc(var(--nl-space-1) * -1);
+  background: var(--nl-color-border);
+}
+
+.label {
+  padding-block: var(--nl-space-2) var(--nl-space-1);
+  padding-inline: var(--nl-space-3);
+  color: var(--nl-color-text-muted);
+  font-size: var(--nl-font-size-xs);
+  font-weight: var(--nl-font-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    animation: none;
+  }
+}

@@ -1,0 +1,20 @@
+.field {
+  display: grid;
+  gap: var(--nl-space-2);
+  font-family: var(--nl-font-family-sans);
+}
+
+.hint,
+.error {
+  margin: 0;
+  font-size: var(--nl-font-size-sm);
+  line-height: var(--nl-font-leading-normal);
+}
+
+.hint {
+  color: var(--nl-color-text-muted);
+}
+
+.error {
+  color: var(--nl-color-danger);
+}

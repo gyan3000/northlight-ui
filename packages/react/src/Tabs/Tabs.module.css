@@ -1,0 +1,73 @@
+.root {
+  font-family: var(--nl-font-family-sans);
+  color: var(--nl-color-text);
+}
+
+.list {
+  display: inline-flex;
+  gap: var(--nl-space-1);
+  padding: var(--nl-space-1);
+  border: var(--nl-border-width-container) solid var(--nl-color-outline);
+  border-radius: var(--nl-radius-full);
+  background: var(--nl-color-surface);
+  backdrop-filter: var(--nl-blur-surface);
+  -webkit-backdrop-filter: var(--nl-blur-surface);
+}
+
+.trigger {
+  padding-block: var(--nl-space-2);
+  padding-inline: var(--nl-space-4);
+  border: var(--nl-border-width-control) solid transparent;
+  border-radius: var(--nl-radius-full);
+  background: transparent;
+  color: var(--nl-color-text-muted);
+  font-family: inherit;
+  font-size: var(--nl-font-size-sm);
+  font-weight: var(--nl-font-weight-medium);
+  line-height: var(--nl-font-leading-tight);
+  cursor: pointer;
+  transition:
+    background-color var(--nl-motion-duration-fast) var(--nl-motion-easing-standard),
+    color var(--nl-motion-duration-fast) var(--nl-motion-easing-standard);
+}
+
+.trigger:hover:not([data-state="active"], :disabled) {
+  background: var(--nl-color-subtle);
+  color: var(--nl-color-text);
+}
+
+/* The active tab uses the same fill as the primary button, so it stands out in both styles. */
+.trigger[data-state="active"] {
+  background: var(--nl-fill-action);
+  border-color: var(--nl-color-edge);
+  color: var(--nl-color-action-text);
+  box-shadow: var(--nl-shadow-sm);
+}
+
+.trigger:focus-visible {
+  outline: 3px solid var(--nl-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.content {
+  margin-block-start: var(--nl-space-4);
+  font-size: var(--nl-font-size-sm);
+  line-height: var(--nl-font-leading-normal);
+}
+
+.content:focus-visible {
+  outline: 3px solid var(--nl-color-focus-ring);
+  outline-offset: 4px;
+  border-radius: var(--nl-radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger {
+    transition: none;
+  }
+}

@@ -1,0 +1,56 @@
+.track {
+  position: relative;
+  box-sizing: border-box;
+  inline-size: 100%;
+  overflow: hidden;
+  border: var(--nl-border-width-control) solid var(--nl-color-border-strong);
+  border-radius: var(--nl-radius-full);
+  background: var(--nl-color-surface);
+  backdrop-filter: var(--nl-blur-surface);
+  -webkit-backdrop-filter: var(--nl-blur-surface);
+}
+
+.sm {
+  block-size: 0.5rem;
+}
+.md {
+  block-size: 0.875rem;
+}
+.lg {
+  block-size: 1.25rem;
+}
+
+.indicator {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  background: var(--nl-fill-action);
+  border-radius: var(--nl-radius-full);
+  transition: inline-size var(--nl-motion-duration-base) var(--nl-motion-easing-standard);
+}
+
+/* Unknown total: a segment slides across. inset-inline-start keeps it RTL-safe. */
+.indicator[data-state="indeterminate"] {
+  inline-size: 40%;
+  animation: slide 1.4s var(--nl-motion-easing-standard) infinite;
+}
+
+@keyframes slide {
+  from {
+    inset-inline-start: -40%;
+  }
+  to {
+    inset-inline-start: 100%;
+  }
+}
+
+/* Reduced motion: a static, centered segment still reads as "working". */
+@media (prefers-reduced-motion: reduce) {
+  .indicator {
+    transition: none;
+  }
+  .indicator[data-state="indeterminate"] {
+    animation: none;
+    inset-inline-start: 30%;
+  }
+}

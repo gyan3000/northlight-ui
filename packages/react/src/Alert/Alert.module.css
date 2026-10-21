@@ -1,0 +1,65 @@
+.alert {
+  display: flex;
+  gap: var(--nl-space-3);
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: var(--nl-space-4);
+  border: var(--nl-border-width-container) solid var(--nl-color-outline);
+  backdrop-filter: var(--nl-blur-surface);
+  -webkit-backdrop-filter: var(--nl-blur-surface);
+  border-radius: var(--nl-radius-md);
+  background: var(--_bg);
+  color: var(--_fg);
+  box-shadow: var(--nl-shadow-md);
+  font-family: var(--nl-font-family-sans);
+  font-size: var(--nl-font-size-sm);
+  line-height: var(--nl-font-leading-normal);
+}
+
+/* The icon sits in a solid round badge. */
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border-radius: var(--nl-radius-full);
+  background: var(--nl-color-ink);
+  color: var(--nl-color-bg);
+}
+.icon > svg {
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+
+.content {
+  min-inline-size: 0;
+  padding-block-start: 0.1875rem;
+}
+
+.title {
+  margin: 0;
+  font-weight: var(--nl-font-weight-semibold);
+}
+
+.title + .body {
+  margin-block-start: var(--nl-space-1);
+}
+
+.info {
+  --_bg: var(--nl-color-info-bg);
+  --_fg: var(--nl-color-info-fg);
+}
+.success {
+  --_bg: var(--nl-color-success-bg);
+  --_fg: var(--nl-color-success-fg);
+}
+.warning {
+  --_bg: var(--nl-color-warning-bg);
+  --_fg: var(--nl-color-warning-fg);
+}
+.danger {
+  --_bg: var(--nl-color-danger-bg);
+  --_fg: var(--nl-color-danger-fg);
+}

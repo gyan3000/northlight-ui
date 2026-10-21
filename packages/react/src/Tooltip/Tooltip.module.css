@@ -1,0 +1,33 @@
+/* Inverted: dark chip in light mode, light chip in dark mode. */
+.content {
+  z-index: var(--nl-z-popover);
+  box-sizing: border-box;
+  max-inline-size: 18rem;
+  padding-block: var(--nl-space-1);
+  padding-inline: var(--nl-space-3);
+  border-radius: var(--nl-radius-sm);
+  background: var(--nl-color-ink);
+  color: var(--nl-color-bg);
+  font-family: var(--nl-font-family-sans);
+  font-size: var(--nl-font-size-xs);
+  font-weight: var(--nl-font-weight-medium);
+  line-height: var(--nl-font-leading-normal);
+  box-shadow: var(--nl-shadow-md);
+  animation: fade-in var(--nl-motion-duration-fast) var(--nl-motion-easing-standard);
+}
+
+.arrow {
+  fill: var(--nl-color-ink);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    animation: none;
+  }
+}

@@ -1,0 +1,89 @@
+.root {
+  position: relative;
+  inline-size: 100%;
+}
+
+/* Room for the chevron. Doubled so it wins over the shared Input padding. */
+.input.input {
+  padding-inline-end: calc(var(--nl-space-4) + 1.25rem);
+}
+
+.chevron {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: var(--nl-space-3);
+  display: inline-flex;
+  align-items: center;
+  inline-size: 1rem;
+  color: var(--nl-color-text-muted);
+  pointer-events: none;
+}
+.chevron > svg {
+  inline-size: 100%;
+  block-size: 1rem;
+}
+
+.popup {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: calc(100% + var(--nl-space-2));
+  z-index: var(--nl-z-popover);
+  box-sizing: border-box;
+  max-block-size: 16rem;
+  overflow-y: auto;
+  border: var(--nl-border-width-container) solid var(--nl-color-outline);
+  border-radius: var(--nl-radius-md);
+  background: var(--nl-color-surface-raised);
+  color: var(--nl-color-text);
+  box-shadow: var(--nl-shadow-lg);
+  backdrop-filter: var(--nl-blur-surface);
+  -webkit-backdrop-filter: var(--nl-blur-surface);
+  font-family: var(--nl-font-family-sans);
+}
+
+.list {
+  margin: 0;
+  padding: var(--nl-space-1);
+  list-style: none;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nl-space-3);
+  padding-block: var(--nl-space-2);
+  padding-inline: var(--nl-space-3);
+  border-radius: var(--nl-radius-sm);
+  font-size: var(--nl-font-size-sm);
+  line-height: var(--nl-font-leading-tight);
+  cursor: pointer;
+  user-select: none;
+}
+
+.option[data-active] {
+  background: var(--nl-fill-action);
+  color: var(--nl-color-action-text);
+}
+
+.option[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.check {
+  display: inline-flex;
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+.check > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.empty {
+  padding-block: var(--nl-space-3);
+  padding-inline: var(--nl-space-4);
+  color: var(--nl-color-text-muted);
+  font-size: var(--nl-font-size-sm);
+}

@@ -1,0 +1,104 @@
+.scroll {
+  inline-size: 100%;
+  overflow-x: auto;
+  border: var(--nl-border-width-container) solid var(--nl-color-outline);
+  border-radius: var(--nl-radius-lg);
+  background: var(--nl-color-surface);
+  backdrop-filter: var(--nl-blur-surface);
+  -webkit-backdrop-filter: var(--nl-blur-surface);
+}
+.scroll:focus-visible {
+  outline: 3px solid var(--nl-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  color: var(--nl-color-text);
+  font-family: var(--nl-font-family-sans);
+  font-size: var(--nl-font-size-sm);
+  line-height: var(--nl-font-leading-normal);
+  text-align: start;
+}
+
+.caption {
+  padding: var(--nl-space-3) var(--nl-space-4);
+  color: var(--nl-color-text-muted);
+  text-align: start;
+  caption-side: bottom;
+}
+
+.header {
+  background: var(--nl-color-subtle);
+}
+
+.head {
+  padding-block: var(--nl-space-3);
+  padding-inline: var(--nl-space-4);
+  font-weight: var(--nl-font-weight-semibold);
+  text-align: start;
+  white-space: nowrap;
+  border-block-end: var(--nl-border-width-container) solid var(--nl-color-border);
+}
+
+.cell {
+  padding-block: var(--nl-space-3);
+  padding-inline: var(--nl-space-4);
+  text-align: start;
+  vertical-align: middle;
+}
+
+.row + .row .cell,
+.body .row + .row .head {
+  border-block-start: var(--nl-border-width-container) solid var(--nl-color-border);
+}
+.body .row:hover {
+  background: var(--nl-color-subtle);
+}
+
+.footer {
+  background: var(--nl-color-subtle);
+  font-weight: var(--nl-font-weight-semibold);
+}
+
+.sortButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nl-space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  border-radius: var(--nl-radius-sm);
+}
+.sortButton:hover {
+  color: var(--nl-color-text-muted);
+}
+.sortButton:focus-visible {
+  outline: 3px solid var(--nl-color-focus-ring);
+  outline-offset: 3px;
+}
+
+.sortIcon {
+  display: inline-flex;
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+.sortIcon > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+/* Both chevrons are faint; the active direction is solid. */
+.up,
+.down {
+  opacity: 0.35;
+}
+.sortIcon[data-direction="ascending"] .up,
+.sortIcon[data-direction="descending"] .down {
+  opacity: 1;
+}

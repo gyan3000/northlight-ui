@@ -1,0 +1,46 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border: var(--nl-border-width-container) solid var(--nl-color-outline);
+  backdrop-filter: var(--nl-blur-surface);
+  -webkit-backdrop-filter: var(--nl-blur-surface);
+  border-radius: var(--nl-radius-full);
+  font-family: var(--nl-font-family-sans);
+  font-weight: var(--nl-font-weight-semibold);
+  line-height: var(--nl-font-leading-tight);
+  white-space: nowrap;
+  background: var(--_bg);
+  color: var(--_fg);
+}
+
+.sm {
+  padding-block: 0.0625rem;
+  padding-inline: var(--nl-space-2);
+  font-size: var(--nl-font-size-xs);
+}
+.md {
+  padding-block: 0.125rem;
+  padding-inline: var(--nl-space-3);
+  font-size: var(--nl-font-size-sm);
+}
+
+.neutral {
+  --_bg: var(--nl-color-surface);
+  --_fg: var(--nl-color-text);
+}
+.info {
+  --_bg: var(--nl-color-info-bg);
+  --_fg: var(--nl-color-info-fg);
+}
+.success {
+  --_bg: var(--nl-color-success-bg);
+  --_fg: var(--nl-color-success-fg);
+}
+.warning {
+  --_bg: var(--nl-color-warning-bg);
+  --_fg: var(--nl-color-warning-fg);
+}
+.danger {
+  --_bg: var(--nl-color-danger-bg);
+  --_fg: var(--nl-color-danger-fg);
+}

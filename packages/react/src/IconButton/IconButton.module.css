@@ -1,0 +1,28 @@
+/* Doubled class so these beat Button's padding rules regardless of CSS order. */
+.square.square {
+  padding: 0;
+  aspect-ratio: 1;
+}
+
+.sm.sm {
+  inline-size: 2rem;
+  block-size: 2rem;
+}
+.md.md {
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+}
+.lg.lg {
+  inline-size: 3rem;
+  block-size: 3rem;
+}
+
+.icon {
+  display: inline-flex;
+  inline-size: 1.25em;
+  block-size: 1.25em;
+}
+.icon > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}

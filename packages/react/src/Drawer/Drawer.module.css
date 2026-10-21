@@ -1,0 +1,100 @@
+.panel {
+  position: fixed;
+  z-index: var(--nl-z-overlay);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: var(--nl-space-6);
+  overflow-y: auto;
+  border: var(--nl-border-width-container) solid var(--nl-color-outline);
+  background: var(--nl-color-surface-raised);
+  color: var(--nl-color-text);
+  box-shadow: var(--nl-shadow-lg);
+  backdrop-filter: var(--nl-blur-surface);
+  -webkit-backdrop-filter: var(--nl-blur-surface);
+  font-family: var(--nl-font-family-sans);
+}
+
+.panel:focus-visible {
+  outline: none;
+}
+
+/* start/end use logical properties, so they flip in right-to-left layouts. */
+.start,
+.end {
+  inset-block: 0;
+  inline-size: min(26rem, calc(100vw - 2rem));
+}
+.start {
+  inset-inline-start: 0;
+  border-start-end-radius: var(--nl-radius-lg);
+  border-end-end-radius: var(--nl-radius-lg);
+  animation: slide-from-start var(--nl-motion-duration-base) var(--nl-motion-easing-standard);
+}
+.end {
+  inset-inline-end: 0;
+  border-start-start-radius: var(--nl-radius-lg);
+  border-end-start-radius: var(--nl-radius-lg);
+  animation: slide-from-end var(--nl-motion-duration-base) var(--nl-motion-easing-standard);
+}
+
+.top,
+.bottom {
+  inset-inline: 0;
+  max-block-size: min(32rem, calc(100vh - 2rem));
+}
+.top {
+  inset-block-start: 0;
+  border-end-start-radius: var(--nl-radius-lg);
+  border-end-end-radius: var(--nl-radius-lg);
+  animation: slide-from-top var(--nl-motion-duration-base) var(--nl-motion-easing-standard);
+}
+.bottom {
+  inset-block-end: 0;
+  border-start-start-radius: var(--nl-radius-lg);
+  border-start-end-radius: var(--nl-radius-lg);
+  animation: slide-from-bottom var(--nl-motion-duration-base) var(--nl-motion-easing-standard);
+}
+
+.body {
+  flex: 1;
+}
+
+.footer {
+  margin-block-start: auto;
+  padding-block-start: var(--nl-space-4);
+}
+
+@keyframes slide-from-end {
+  from {
+    transform: translateX(100%);
+  }
+}
+@keyframes slide-from-start {
+  from {
+    transform: translateX(-100%);
+  }
+}
+[dir="rtl"] .end {
+  animation-name: slide-from-start;
+}
+[dir="rtl"] .start {
+  animation-name: slide-from-end;
+}
+@keyframes slide-from-top {
+  from {
+    transform: translateY(-100%);
+  }
+}
+@keyframes slide-from-bottom {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  [dir="rtl"] .panel {
+    animation: none;
+  }
+}
