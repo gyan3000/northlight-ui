@@ -1,0 +1,67 @@
+# Releases with Changesets.
+#
+# On every push to main this either
+#   1. opens or updates a "chore: version packages" pull request (when there are pending changesets), or
+#   2. publishes to npm (when that pull request is merged and a package is no longer private).
+#
+# Nothing is published while northlight-ui is "private": true in packages/react/package.json.
+#
+# One-time setup (repository settings):
+#   - Secret NPM_TOKEN: an npm access token that can publish northlight-ui.
+#   - Settings > Actions > General > Workflow permissions: allow GitHub Actions to create pull requests.
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+# The Storybook build must not send usage data from CI.
+env:
+  STORYBOOK_DISABLE_TELEMETRY: "1"
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write        # push the version commit and tags
+  pull-requests: write   # open the version pull request
+  id-token: write        # npm provenance (signed link from the package to this build)
+
+jobs:
+  release:
+    # Forks cannot publish: they have no NPM_TOKEN and must not try.
+    if: github.repository == 'gyan3000/northlight-ui'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - run: pnpm install --frozen-lockfile
+
+      # Never release something that does not pass the same checks as a pull request.
+      - run: pnpm build
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm size
+
+      - name: Version pull request or publish
+        uses: changesets/action@v1
+        with:
+          version: pnpm version-packages
+          # The build above already ran, so publish directly instead of building a second time.
+          publish: pnpm changeset publish
+          title: "chore: version packages"
+          commit: "chore: version packages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: "true"

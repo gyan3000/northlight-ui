@@ -6,6 +6,10 @@ on:
   push:
     branches: [main]
 
+# The Storybook build must not send usage data from CI.
+env:
+  STORYBOOK_DISABLE_TELEMETRY: "1"
+
 jobs:
   test:
     runs-on: ubuntu-latest

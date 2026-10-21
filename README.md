@@ -2,9 +2,14 @@
 
 An accessible, themeable React component library (npm package: `northlight-ui`) built on a CSS-variable design-token system. Work in progress; see the PRD for scope and milestones.
 
+**Live documentation:** https://gyan3000.github.io/northlight-ui/ (Storybook: components, design tokens, guides and recipes)
+
 ## Status
 
-Phase 1 (foundations and vertical slice): tokens, `ThemeProvider`, `Button`, Storybook.
+- 34 components plus `ThemeProvider`, each with tests, stories and a right-to-left variant.
+- Two visual styles (glass and aurora, soft neo-brutalist), each in light and dark.
+- Checked with axe in jsdom and in a real browser (`pnpm a11y`), with bundle budgets enforced (`pnpm size`).
+- Not published to npm yet. See [Releasing](#releasing).
 
 ## Requirements
 
@@ -70,6 +75,18 @@ Re-theme by overriding semantic tokens in plain CSS:
 ## Component checklist ("done" means all of these)
 
 Code, CSS Module using tokens only, unit tests with axe, Storybook stories with a keyboard play function, an RTL story, and docs.
+
+## Releasing
+
+Releases use [Changesets](https://github.com/changesets/changesets). For any user-facing change, run `pnpm changeset`
+and commit the file it creates. When changes reach `main`, the Release workflow opens a "chore: version packages" pull
+request; merging it publishes `northlight-ui` to npm with provenance. Setup the workflow needs is described in
+`.github/workflows/release.yml`.
+
+## Documentation site
+
+The Docs workflow builds the Storybook and deploys it to GitHub Pages on every push to `main`
+(repository Settings > Pages > Source: GitHub Actions).
 
 ## License
 

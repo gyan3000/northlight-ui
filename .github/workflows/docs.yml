@@ -1,0 +1,60 @@
+# Publishes the Storybook documentation site to GitHub Pages.
+#
+# One-time setup: repository Settings > Pages > Build and deployment > Source: "GitHub Actions".
+# The site then lives at https://<owner>.github.io/<repo>/ (for this repo: gyan3000.github.io/northlight-ui).
+name: Docs
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write      # publish to GitHub Pages
+  id-token: write   # lets the deploy step prove which workflow it came from
+
+# The Storybook build must not send usage data from CI.
+env:
+  STORYBOOK_DISABLE_TELEMETRY: "1"
+
+# Never run two deployments at once, and never cancel one halfway.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Builds everything: the Storybook imports the compiled design tokens.
+      - run: pnpm build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/docs/storybook-static
+
+  deploy:
+    needs: build
+    # Forks have no Pages site of their own to publish to.
+    if: github.repository == 'gyan3000/northlight-ui'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

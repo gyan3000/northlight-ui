@@ -1,9 +1,33 @@
 {
   "name": "northlight-ui",
   "version": "0.0.0",
-  "private": true,
   "description": "Accessible, themeable React components.",
   "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gyan3000/northlight-ui.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/gyan3000/northlight-ui#readme",
+  "bugs": {
+    "url": "https://github.com/gyan3000/northlight-ui/issues"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "design-system",
+    "ui",
+    "accessible",
+    "a11y",
+    "design-tokens",
+    "css-variables",
+    "typescript",
+    "radix"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "type": "module",
   "files": [
     "dist"

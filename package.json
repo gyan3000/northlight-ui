@@ -15,9 +15,13 @@
     "typecheck": "turbo run typecheck",
     "storybook": "pnpm --filter northlight-ui-docs dev",
     "a11y": "pnpm --filter northlight-ui-docs build && pnpm --filter northlight-ui-docs test:a11y",
-    "size": "turbo run size"
+    "size": "turbo run size",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "turbo": "latest",
     "typescript": "latest"
   }
